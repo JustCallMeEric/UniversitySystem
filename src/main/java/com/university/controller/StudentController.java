@@ -52,4 +52,10 @@ public class StudentController {
         studentService.delete(studentId);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<Student>> searchByName(@RequestParam String name) {
+        List<Student> students = studentService.findByNameContaining(name);
+        return ResponseEntity.ok(students);
+    }
 }

@@ -16,4 +16,6 @@ public interface StudentMapper {
     int update(Student student);
 
     int deleteByStudentId(@Param("studentId") String studentId);
+
+    List<Student> selectByNameContaining(@Param("name") String name);
 }

@@ -70,4 +70,9 @@ public class StudentServiceImpl implements StudentService {
             throw new StudentNotFoundException("Failed to delete student with ID " + studentId);
         }
     }
+
+    @Override
+    public List<Student> findByNameContaining(String name) {
+        return studentMapper.selectByNameContaining(name);
+    }
 }

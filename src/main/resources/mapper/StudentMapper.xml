@@ -39,4 +39,11 @@
         DELETE FROM student WHERE student_id = #{studentId}
     </delete>
 
+    <select id="selectByNameContaining" resultMap="StudentResultMap">
+        SELECT student_id, name, age
+        FROM student
+        WHERE name LIKE CONCAT('%', #{name}, '%')
+        ORDER BY id
+    </select>
+
 </mapper>
