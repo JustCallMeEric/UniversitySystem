@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.university.dao.StudentMapper">
+
+    <resultMap id="StudentResultMap" type="com.university.entity.Student">
+        <id property="id" column="id"/>
+        <result property="studentId" column="student_id"/>
+        <result property="name" column="name"/>
+        <result property="age" column="age"/>
+        <result property="college" column="college"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+        <result property="collegeName" column="college_name"/>
+    </resultMap>
+
+    <select id="selectAll" resultMap="StudentResultMap">
+        SELECT id, student_id, name, age, college, created_at, updated_at
+        FROM student
+        ORDER BY id
+    </select>
+
+    <select id="selectByStudentId" resultMap="StudentResultMap">
+        SELECT s.id, s.student_id, s.name, s.age, s.college, s.created_at, s.updated_at, c.name AS college_name
+        FROM student s
+        LEFT JOIN college c ON s.college = c.id
+        WHERE s.student_id = #{studentId}
+    </select>
+
+    <update id="update">
+        UPDATE student
+        SET name = #{name},
+            age = #{age},
+            college = #{college}
+        WHERE student_id = #{studentId}
+    </update>
+
+    <delete id="deleteByStudentId">
+        DELETE FROM student WHERE student_id = #{studentId}
+    </delete>
+
+</mapper>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.university.dao.CollegeMapper">
+
+    <resultMap id="CollegeResultMap" type="com.university.entity.College">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+    </resultMap>
+
+    <select id="selectById" resultMap="CollegeResultMap">
+        SELECT id, name
+        FROM college
+        WHERE id = #{id}
+    </select>
+
+</mapper>
