@@ -40,10 +40,11 @@
     </delete>
 
     <select id="selectByNameContaining" resultMap="StudentResultMap">
-        SELECT student_id, name, age
-        FROM student
-        WHERE name LIKE CONCAT('%', #{name}, '%')
-        ORDER BY id
+        SELECT s.id, s.student_id, s.name, s.age, s.college, s.created_at, s.updated_at, c.name AS college_name
+        FROM student s
+        LEFT JOIN college c ON s.college = c.id
+        WHERE s.name LIKE CONCAT('%', #{name}, '%')
+        ORDER BY s.id
     </select>
 
 </mapper>

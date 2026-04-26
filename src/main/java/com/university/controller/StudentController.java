@@ -55,7 +55,10 @@ public class StudentController {
 
     @GetMapping("/search")
     public ResponseEntity<List<Student>> searchByName(@RequestParam String name) {
-        List<Student> students = studentService.findByNameContaining(name);
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("请输入学生姓名");
+        }
+        List<Student> students = studentService.findByNameContaining(name.trim());
         return ResponseEntity.ok(students);
     }
 }

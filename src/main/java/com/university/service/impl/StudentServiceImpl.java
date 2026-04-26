@@ -73,6 +73,12 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public List<Student> findByNameContaining(String name) {
-        return studentMapper.selectByNameContaining(name);
+        List<Student> students = studentMapper.selectByNameContaining(name);
+        for (Student student : students) {
+            if (student.getCollegeName() == null) {
+                student.setCollegeName("该学院不存在");
+            }
+        }
+        return students;
     }
 }
